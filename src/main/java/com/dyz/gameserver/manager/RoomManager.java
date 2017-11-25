@@ -17,7 +17,6 @@ import com.dyz.myBatis.services.RoomInfoService;
  */
 public class RoomManager {
 	
-
     Map<Integer,RoomLogic> roomList;
 	//创建/加入房间之后存 玩家uuid和房间id
 	private Map<Integer,Integer> uuidAndRoomId;
