@@ -84,5 +84,11 @@ public class LoginVO {
 	public void setIP(String iP) {
 		IP = iP;
 	}
+
+	@Override
+	public String toString() {
+		return "LoginVO [openId=" + openId + ", nickName=" + nickName + ", headIcon=" + headIcon + ", unionid="
+				+ unionid + ", province=" + province + ", city=" + city + ", sex=" + sex + ", IP=" + IP + "]";
+	}
     
 }

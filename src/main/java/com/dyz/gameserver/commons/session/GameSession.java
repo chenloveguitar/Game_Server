@@ -196,5 +196,11 @@ public class GameSession implements GameObj {
 			this.time = this.time + i;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "GameSession [session=" + session + ", address=" + address + ", time=" + time + ", role=" + role
+				+ ", isLogin=" + isLogin + "]";
+	}
 	
 }

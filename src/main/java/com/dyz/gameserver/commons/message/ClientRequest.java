@@ -65,4 +65,9 @@ public class ClientRequest{
 		msgBody=null;
 	}
 
+	@Override
+	public String toString() {
+		return "ClientRequest [msgBody=" + msgBody + ", msgcode=" + msgcode + "]";
+	}
+
 }

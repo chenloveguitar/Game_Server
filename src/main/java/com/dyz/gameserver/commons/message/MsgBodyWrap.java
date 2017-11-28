@@ -150,4 +150,10 @@ public class MsgBodyWrap {
 	}
 
 
+	@Override
+	public String toString() {
+		return "MsgBodyWrap [in=" + in + ", out=" + out + ", dataIn=" + dataIn + ", dataOut=" + dataOut + "]";
+	}
+
+
 }
