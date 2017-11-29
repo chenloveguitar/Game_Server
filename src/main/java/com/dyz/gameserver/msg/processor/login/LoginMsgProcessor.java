@@ -46,7 +46,14 @@ public class LoginMsgProcessor extends MsgProcessor implements INotAuthProcessor
 		if (account != null && account.getStatus().equals("1")) {
 			gameSession.sendMsg(new ErrorResponse(ErrorCode.Error_000024));
 			return;
-		}
+		} 
+		/**
+		 * TODO 判断用户是否在其他终端中已经登录了游戏,如果登录了,让其他终端的玩家下线,或是不允许重复登录
+		 * 实现思路:(不知道项目中会不会有这样子的需求)
+		 * 大概是将已登录的用户存放在一个map中,key为用户对象,value为ioSession,
+		 * 如果map中已经存在该用户,则通过ioSession对象关闭连接,为当前的用户建立连接
+		 */
+		
 		if (account == null) {
 			// 创建新用户并登录
 			account = new Account();
@@ -76,7 +83,7 @@ public class LoginMsgProcessor extends MsgProcessor implements INotAuthProcessor
 					System.out.println("登录出现异常!");
 				}
 			} else {
-				Avatar tempAva = new Avatar();
+				Avatar tempAva = new Avatar();	
 				AvatarVO tempAvaVo = new AvatarVO();
 				tempAvaVo.setAccount(account);
 				tempAvaVo.setIP(loginVO.getIP());
@@ -101,7 +108,7 @@ public class LoginMsgProcessor extends MsgProcessor implements INotAuthProcessor
 		} else {
 			// 如果玩家是掉线的，则直接从缓存(GameServerContext)中取掉线玩家的信息
 			// 判断用户是否已经进行断线处理(如果前端断线时间过短，后台则可能还未来得及把用户信息放入到离线map里面，就已经登录了，所以取出来就会是空)
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 			Avatar avatar = GameServerContext.getAvatarFromOn(account.getUuid());
 			if (avatar == null) {
 				avatar = GameServerContext.getAvatarFromOff(account.getUuid());
@@ -131,7 +138,7 @@ public class LoginMsgProcessor extends MsgProcessor implements INotAuthProcessor
 				// GameSessionManager.getInstance().putGameSessionInHashMap(gameSession,avatar.getUuId());
 				GameSessionManager.getInstance().sessionMap.put("uuid_" + account.getUuid(), gameSession);
 				GameSessionManager.getInstance().updateTopOnlineAccountCount();
-				Thread.sleep(3000);
+//				Thread.sleep(3000);
 				// 公告发送给玩家
 				NoticeTable notice = null;
 				try {

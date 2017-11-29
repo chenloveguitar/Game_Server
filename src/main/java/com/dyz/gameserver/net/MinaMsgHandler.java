@@ -33,6 +33,7 @@ public class MinaMsgHandler extends IoHandlerAdapter{
 	@Override
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
+		logger.info(message.getClass().getName());
 		ClientRequest clientRequest = (ClientRequest) message;
 		
 		//性能优化(10-25)

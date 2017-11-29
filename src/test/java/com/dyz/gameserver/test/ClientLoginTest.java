@@ -30,7 +30,7 @@ public class ClientLoginTest {
 				"  \"ziMo\": 0\n" +
 				"}";
 		RoomVO roomVo = (RoomVO)JsonUtilTool.fromJson(roomVoDataJson,RoomVO.class);
-		System.out.print(roomVo);
+		System.out.println("房间对象:"+roomVo);
 
 
 
@@ -45,13 +45,15 @@ public class ClientLoginTest {
 	            //向服务器端发送数据  
 	            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 				//ObjectOutputStream  out = new ObjectOutputStream (socket.getOutputStream());
-	            System.out.print("请输入openid: \t");
+	            System.out.println("请输入code: \t");
+	            String code = new BufferedReader(new InputStreamReader(System.in)).readLine();
+	            System.out.println("请输入openid: \t");
 	            String openid = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
 				LoginVO loginVO = new LoginVO();
 				loginVO.setOpenId(openid);
 				//登录操作，不同操作不同的ConnectAPI.CREATEROOM_REQUEST值    消息处理方式
-				ClientSendRequest loginSend = new ClientSendRequest(ConnectAPI.LOGIN_REQUEST);
+				ClientSendRequest loginSend = new ClientSendRequest(Integer.valueOf(code));
 				loginSend.output.writeUTF(JsonUtilTool.toJson(loginVO));
 				out.write(loginSend.entireMsg().array());//
 				
@@ -77,12 +79,11 @@ public class ClientLoginTest {
 
 	public static void serverCallBack(DataInputStream input){
 		try {
-			System.out.println("服务器端返回过来的是: " );
-			input.readByte();
+			System.out.println("服务器端返回过来的是: " +input.readByte());
 			int len = input.readInt();
-			System.out.println(len);
+			System.out.println("数据包长度:"+len);
 			int code = input.readInt();
-			System.out.println(code);
+			System.out.println("服务器返回的状态码:"+code);
 			String ret = input.readUTF();
 			System.out.println("服务器端返回过来的是: " + ret);
 			// 如接收到 "OK" 则断开连接

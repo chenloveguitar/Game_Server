@@ -7,21 +7,31 @@
 	<name>Game_Server Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- 
+			log4j 可自定义颜色的日志输出，目前还没配置好，控制台出现如下信息输出：
+			SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+			SLF4J: Defaulting to no-operation (NOP) logger implementation
+			SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+		 -->
+<!--         <dependency> -->
+<!--             <groupId>org.apache.logging.log4j</groupId> -->
+<!--             <artifactId>log4j-core</artifactId> -->
+<!--             <version>2.6.2</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.apache.logging.log4j</groupId> -->
+<!--             <artifactId>log4j-api</artifactId> -->
+<!--             <version>2.6.2</version> -->
+<!--         </dependency> -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.5.6</version>
-			<type>jar</type>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.6.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.5.6</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ibatis</groupId>
