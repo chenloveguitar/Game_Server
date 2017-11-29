@@ -1,9 +1,11 @@
-package com.dyz.gameserver.bootstrap;
+package com.dyz.gameserver.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class GamserServerStartupAndStop implements ServletContextListener{
+import com.dyz.gameserver.bootstrap.GameServer;
+
+public class GamserServerListener implements ServletContextListener{
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {

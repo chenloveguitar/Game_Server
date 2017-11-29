@@ -3,7 +3,10 @@ package com.dyz.gameserver.net;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.context.ConnectAPI;
 import com.dyz.gameserver.bootstrap.GameServer;
 import com.dyz.gameserver.commons.message.ClientRequest;
 import com.dyz.gameserver.commons.session.GameSession;
@@ -15,16 +18,16 @@ import com.dyz.gameserver.commons.session.GameSession;
  */
 public class MinaMsgHandler extends IoHandlerAdapter{
 	
-//	private static final Logger logger = LoggerFactory.getLogger(MinaMsgHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(MinaMsgHandler.class);
 	
-//	@Override
-//	public void sessionCreated(IoSession session) throws Exception {
-//
-//	}
+	@Override
+	public void sessionCreated(IoSession session) throws Exception {
+
+	}
 	@Override
 	public void sessionOpened(IoSession session) throws Exception{
 		new GameSession(session);
-		//logger.info("a session create from ip {}",session.getRemoteAddress());
+		logger.info("a session create from ip {}",session.getRemoteAddress());
 	}
 	
 	@Override
@@ -34,7 +37,7 @@ public class MinaMsgHandler extends IoHandlerAdapter{
 		
 		//性能优化(10-25)
 		int msgCode = clientRequest.getMsgCode();
-		if(msgCode == 1000){//客户端请求断开链接
+		if(msgCode == ConnectAPI.DISCONNECT){//客户端请求断开链接
 			session.close(true);
 			
 		}else{
@@ -59,9 +62,9 @@ public class MinaMsgHandler extends IoHandlerAdapter{
 			throws Exception {
 		//强制退出
 		sessionClosed(session);//性能优化(10-25)
-//		System.out.println(cause.getMessage());
-//		logger.error("服务器出错 {}",cause.getMessage());
-		//cause.printStackTrace();
+		System.out.println(cause.getMessage());
+		logger.error("服务器出错 {}",cause.getMessage());
+		cause.printStackTrace();
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class MinaMsgHandler extends IoHandlerAdapter{
      */
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		//logger.info("a session closed ip:{}",session.getRemoteAddress());
+		logger.info("a session closed ip:{}",session.getRemoteAddress());
 		GameSession gameSession = GameSession.getInstance(session);
 		if(gameSession !=null){
 			gameSession.close();

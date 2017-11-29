@@ -8,32 +8,18 @@ import com.dyz.persist.util.JsonUtilTool;
 import java.io.*;
 import java.net.Socket;
 
-public class Client {
+/**
+ * 进入房间测试
+ * @author jumili
+ *
+ */
+public class ClientJoinRoomTest {
 	public static final String IP_ADDR = "localhost";//服务器地址 
-	public static final int PORT = 10122;//服务器端口号  
+	public static final int PORT = 1101;//服务器端口号  
 	
     public static void main(String[] args) {  
         System.out.println("客户端启动...");  
         System.out.println("当接收到服务器端字符为 \"OK\" 的时候, 客户端将终止\n");
-
-
-		String adaf = JsonUtilTool.toJson(new RoomVO());
-		System.out.println("String adaf -- >"+adaf);
-		String asdf = "{\n" +
-				"  \"hong\": true,\n" +
-				"  \"ma\": 2,\n" +
-				"  \"name\": \"\",\n" +
-				"  \"roomId\": 123,\n" +
-				"  \"roomType\": 1,\n" +
-				"  \"roundNumber\": 0,\n" +
-				"  \"sevenDouble\": false,\n" +
-				"  \"ziMo\": 0\n" +
-				"}";
-		RoomVO s = (RoomVO)JsonUtilTool.fromJson(asdf,RoomVO.class);
-		System.out.print("");
-
-
-
 		while (true) {
         	Socket socket = null;
         	try {
@@ -56,6 +42,25 @@ public class Client {
 				out.write(loginSend.entireMsg().array());//
 				
 				serverCallBack(input);
+				
+				String xxxx = new BufferedReader(new InputStreamReader(System.in)).readLine();
+				String asdf = "{\n" +
+						"  \"hong\": true,\n" +
+						"  \"ma\": 2,\n" +
+						"  \"name\": \"\",\n" +
+						"  \"roomId\": "+xxxx+",\n" +
+						"  \"roomType\": 1,\n" +
+						"  \"roundNumber\": 0,\n" +
+						"  \"sevenDouble\": false,\n" +
+						"  \"ziMo\": 0\n" +
+						"}";
+				String ss = JsonUtilTool.toJson(asdf);
+				ClientSendRequest joinroom = new ClientSendRequest(ConnectAPI.JOIN_ROOM_REQUEST);
+				joinroom.output.writeUTF(ss);
+				out.write(joinroom.entireMsg().array());
+
+				serverCallBack(input);
+
 
 
 				out.close();

@@ -2,7 +2,7 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
-  <listener>
-		<listener-class>com.dyz.gameserver.bootstrap.GamserServerStartupAndStop</listener-class>
+  	<listener>
+		<listener-class>com.dyz.gameserver.listener.GamserServerListener</listener-class>
 	</listener>
 </web-app>

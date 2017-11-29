@@ -449,6 +449,19 @@ public class RoomVO {
 	public void setMultiplying(int multiplying) {
 		this.multiplying = multiplying;
 	}
+
+	@Override
+	public String toString() {
+		return "RoomVO [shuffle=" + shuffle + ", inning=" + inning + ", cardNum=" + cardNum + ", StartGame=" + StartGame
+				+ ", multiplying=" + multiplying + ", listCard=" + listCard + ", remainListCard=" + remainListCard
+				+ ", nextCardindex=" + nextCardindex + ", hasStart=" + hasStart + ", way=" + way + ", dustpan="
+				+ dustpan + ", leastScore=" + leastScore + ", tianShuiCoinType=" + tianShuiCoinType + ", playRule="
+				+ playRule + ", payWay=" + payWay + ", roomId=" + roomId + ", id=" + id + ", roundNumber=" + roundNumber
+				+ ", currentRound=" + currentRound + ", hong=" + hong + ", roomType=" + roomType + ", peoples="
+				+ peoples + ", sevenDouble=" + sevenDouble + ", ma=" + ma + ", magnification=" + magnification
+				+ ", ziMo=" + ziMo + ", xiaYu=" + xiaYu + ", addWordCard=" + addWordCard + ", name=" + name
+				+ ", playerList=" + playerList + ", endStatistics=" + endStatistics + "]";
+	}
 	
 	
 

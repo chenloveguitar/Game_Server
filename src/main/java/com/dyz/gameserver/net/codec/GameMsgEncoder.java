@@ -4,11 +4,13 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderAdapter;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dyz.gameserver.commons.message.ResponseMsg;
 
 public class GameMsgEncoder extends ProtocolEncoderAdapter {
-	//private static final Logger logger = LoggerFactory.getLogger(GameMsgEncoder.class);
+	private static final Logger logger = LoggerFactory.getLogger(GameMsgEncoder.class);
 	public GameMsgEncoder() {
 	}
 
@@ -18,13 +20,13 @@ public class GameMsgEncoder extends ProtocolEncoderAdapter {
 			ResponseMsg value = (ResponseMsg) message;
 			
 		IoBuffer io = value.entireMsg();
-//	    System.out.println("io长度"+io.getLong()+"-----getHexDump"+io.getHexDump());
-//	    System.out.println(io.toString());
+	    System.out.println("io长度"+io.getLong()+"-----getHexDump"+io.getHexDump());
+	    System.out.println(io.toString());
 		out.write(io);
 		out.flush();
 		io.free();//性能优化(10-25)
 		value.release();
-		//logger.info("服务端发送给客户端信息加码");
+		logger.info("服务端发送给客户端信息加码");
 	}
 
 	public void dispose() throws Exception {

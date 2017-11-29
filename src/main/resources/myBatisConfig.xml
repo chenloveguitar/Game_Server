@@ -31,7 +31,8 @@
 				<property name="username" value="root" />
 				<!-- <property name="password" value="erxiang" /> -->
 				<!-- <property name="password" value="1987529" /> -->
-				<property name="password" value="Guomuyun.2017" />
+<!-- 				<property name="password" value="Guomuyun.2017" /> -->
+				<property name="password" value="chenloveguitar@8" />
 			</dataSource>
 		</environment>
 	</environments>

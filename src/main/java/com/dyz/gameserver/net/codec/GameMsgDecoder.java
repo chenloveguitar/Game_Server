@@ -30,20 +30,20 @@ public class GameMsgDecoder extends CumulativeProtocolDecoder {
 	@Override
 	protected  boolean doDecode(IoSession session, IoBuffer iobuffer,
 			ProtocolDecoderOutput protocolDecoderOutput) throws Exception {
-	//	logger.info("iobuffer.remaining()   =   "+iobuffer.remaining());
-	//	logger.info("服务端消息的解码");
+		logger.info("iobuffer.remaining()   =   "+iobuffer.remaining());
+		logger.info("服务端消息的解码");
 		synchronized(iobuffer){
 			if(iobuffer.remaining()<(MsgProtocol.flagSize+MsgProtocol.lengthSize+MsgProtocol.msgCodeSize)){//数据不完整
-				//logger.info("数据包长度不足");
+				logger.info("数据包长度不足");
 				return false;
 			}
 			iobuffer.mark();
 			byte flag = iobuffer.get();//flag，备用
 			if (flag == 1) {
 				int length = iobuffer.getInt();//读取长度字段
-				//System.out.println("消息length："+length+"---"+session.getId());
+				System.out.println("消息length："+length+"---"+session.getId());
 				if(length<=0 || length>MsgProtocol.maxPackLength){//长度字段异常
-					//logger.info("数据包长度异常");
+					logger.info("数据包长度异常");
 					return false;
 				}
 				if(iobuffer.remaining()>=length){//
@@ -67,7 +67,7 @@ public class GameMsgDecoder extends CumulativeProtocolDecoder {
 					iobuffer.free();//性能优化(10-25)
 					return true;
 				}else{
-					//logger.info("数据包尚不完整");
+					logger.info("数据包尚不完整");
 					iobuffer.reset();
 					return false;
 				}

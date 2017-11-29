@@ -6,6 +6,7 @@ public class ConnectAPI {
 		// TODO Auto-generated constructor stub
 	}
 	/////////////////////////////
+	public static int DISCONNECT = 0x003e8;
 	// 传入前端拆分过后的牌组   回复
 	public static int  DISASSEMBLE_RESPONSE = 0x11120;
 	
