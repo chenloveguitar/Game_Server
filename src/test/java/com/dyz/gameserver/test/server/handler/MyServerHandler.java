@@ -1,5 +1,8 @@
 package com.dyz.gameserver.test.server.handler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
@@ -17,42 +20,53 @@ public class MyServerHandler implements IoHandler{
 	
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
-		session.write("sessionCreated");
-		logger.info("sessionCreated......");
+//		session.write("sessionCreated");
+//		logger.info("sessionCreated......");
 	}
 
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
-		session.write("sessionOpened");
-		logger.info("sessionOpened......");
+//		session.write("sessionOpened");
+//		logger.info("sessionOpened......");
 	}
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		session.write("sessionClosed");
-		logger.info("sessionClosed......");
+//		session.write("sessionClosed");
+//		logger.info("sessionClosed......");
 	}
 
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
-		session.write("sessionIdle");
-		logger.info("sessionIdle......");
+//		session.write("sessionIdle");
+		logger.info( "IDLE " + session.getIdleCount( status ));;
 		
 	}
 
+	/**
+	 * 此方法的作用：
+	 * 	以处理在正常处理远程连接过程中引发的异常。
+	 */
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-		session.write("exceptionCaught");
-		logger.error(cause.getMessage());
-		logger.info("exceptionCaught......");
+//		session.write("exceptionCaught");
+		cause.printStackTrace();
+//		logger.info("exceptionCaught......");
 		
 	}
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		logger.info("服务端接收到的数据:{}",message);
+//		logger.info(message.toString());
 		logger.info("messageReceived......");
-		session.write("1234567890");
+		logger.info("message:"+message);
+		String data = message.toString();
+		if(data.trim().equalsIgnoreCase("quit")) {//客户端请求关闭与服务器的连接
+			session.close(true);//立即关闭
+		}
+		//输出客户端输入的内容
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		session.write(format.format(new Date()));
 	}
 
 	@Override
@@ -64,8 +78,8 @@ public class MyServerHandler implements IoHandler{
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-		logger.info("inputClosed......");
-		session.write("inputClosed");
+//		logger.info("inputClosed......");
+//		session.write("inputClosed");
 		
 	}
 	

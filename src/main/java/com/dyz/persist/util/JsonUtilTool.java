@@ -44,10 +44,9 @@ public class JsonUtilTool {
      *            需要转换的对象类型
      * @return 对象
      */
-    @SuppressWarnings("unchecked")
     public static <T> T fromJson(String jsonString, Class<T> type) {
-        JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        return (T) JSONObject.toBean(jsonObject, type);
+        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(jsonString);
+        return (T) com.alibaba.fastjson.JSONObject.toJavaObject(jsonObject, type);
     }
 
     /**

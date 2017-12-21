@@ -1,5 +1,10 @@
 package com.context;
 
+/**
+ * 连接状态码
+ * @author jumili
+ *
+ */
 public class ConnectAPI {
 
 	public ConnectAPI() {

@@ -77,6 +77,8 @@ public class CreateRoomMsgProcssor extends MsgProcessor implements INotAuthProce
 				}
 				
 			}
+		}else {
+			gameSession.sendMsg(new ErrorResponse(ErrorCode.Error_000002));
 		}
 	}
 	

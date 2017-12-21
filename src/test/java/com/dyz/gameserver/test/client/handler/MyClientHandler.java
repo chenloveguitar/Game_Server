@@ -38,11 +38,13 @@ public class MyClientHandler implements IoHandler{
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
+		session.write("messageReceived...");
 		logger.info("messageReceived...");
 	}
 
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
+		session.write("client....");
 		logger.info("messageSent...");
 	}
 

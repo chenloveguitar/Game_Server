@@ -76,6 +76,7 @@ public class MsgBodyWrap {
 	public void writeByte(int value) throws IOException {
 		dataOut.writeByte(value);
 	}
+	//17608241912
 
 	public void writeBoolean(boolean value) throws IOException {
 		dataOut.writeBoolean(value);

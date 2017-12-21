@@ -33,6 +33,7 @@ public class MyHandler implements IoHandler {
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
+		System.out.println(message.getClass());
 		System.out.println("调用---->messageReceived......");
 		System.err.println("session id:"+session.getId());
 		System.err.println("message:"+message);
